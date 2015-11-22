@@ -1,0 +1,5 @@
+To: dysproseum@gmail.com
+From: dysproseum@gmail.com
+Subject: RAID Drive has failed! 
+
+Monitoring script has failed to find all drives in the array are up.
