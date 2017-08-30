@@ -22,6 +22,9 @@ function run(start, limit) {
 
 $("body").append('<div style="display:none" class="port-forwarding"></div>');
 
+// Reset variable storing unavailable ports.
+portused = '';
+
 // Run with this range of instance id's.
 // Add and remove a new rule in the GUI to see what its instance id was.
 run(10000,15000);
