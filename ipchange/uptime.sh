@@ -1,7 +1,6 @@
 #!/bin/bash
 
 UP=0
-# @todo allow resume from previous uptime
 echo $UP;
 
 while (true)
@@ -21,11 +20,10 @@ do
   echo $OUT >> tally.txt
 
   # Update DNS
-  if [[ "$IP" != "$NEW_IP" ]]
-  then
+  if [[ "$IP" != "$NEW_IP" ]]; then
     echo "NEW IP: $NEW_IP"
     IP=$NEW_IP
-    $(./cloudflare.sh $NEW_IP)
+    ./cloudflare.sh $NEW_IP
   fi
   sleep 60
 done
