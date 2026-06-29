@@ -4,7 +4,7 @@
 
 Every 60 seconds:
 
-* Check IP address
+* Check IP address (https://www.ipify.org/ supports its use without limit)
 
 * Log uptime to file
 

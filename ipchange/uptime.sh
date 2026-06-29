@@ -14,16 +14,33 @@ do
     UP=0
   fi
 
-  # Log results
-  OUT="$(date +"%Y-%m-%d %H:%M:%S"),${UP}"
-  echo $OUT
-  echo $OUT >> tally.txt
+  # Auxiliary scripts
+  for script in scripts-enabled/uptime*.sh; do
+    # Skip if no .sh files exist (glob didn't match)
+    [ -e "$script" ] || continue
+
+    # Skip the current script itself to avoid recursion
+    [ "$script" = "$0" ] && continue
+
+    # Ensure the file is executable
+    if [ -x "$script" ]; then
+        "./$script" "$UP"
+    fi
+  done
 
   # Update DNS
   if [[ "$IP" != "$NEW_IP" ]]; then
     echo "NEW IP: $NEW_IP"
     IP=$NEW_IP
-    ./cloudflare.sh $NEW_IP
+
+    for script in scripts-enabled/ipchange*.sh; do
+      [ -e "$script" ] || continue
+      [ "$script" = "$0" ] && continue
+      if [ -x "$script" ]; then
+        "./$script" "$NEW_IP"
+      fi
+    done
   fi
+
   sleep 60
 done
